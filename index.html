@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - Efemeridade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050505;
+      --card: #0f0f0f;
+      --accent: #ffffff;
+      --text: #ffffff;
+      --muted: #b5b5b5;
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at 20% 20%, #111 0%, #050505 60%);
+      color: var(--text);
+      min-height: 100vh;
+      animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .card {
+      background: linear-gradient(160deg, #111, #0a0a0a);
+      border-radius: var(--radius);
+      padding: 40px;
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0,0,0,.7);
+      transition: 0.4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .tag {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 42px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin: 15px 0 25px;
+      max-width: 500px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 35px;
+      gap: 20px;
+    }
+
+    .stat { text-align: center; }
+    .stat h2 { margin: 0; font-size: 20px; }
+    .stat span { color: var(--muted); font-size: 13px; }
+
+    .profile {
+      background: radial-gradient(circle at 30% 30%, #111, #050505);
+      border-radius: var(--radius);
+      height: 420px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      transition: 0.4s ease;
+    }
+
+    .profile:hover {
+      transform: translateY(-4px);
+    }
+
+    .avatar-img {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ffffff22;
+      box-shadow: 0 0 40px rgba(255,255,255,.15);
+      transition: 0.4s ease;
+    }
+
+    .avatar-img:hover {
+      transform: scale(1.05);
+    }
+
+    section { margin-top: 80px; }
+    .section-title { font-size: 28px; margin-bottom: 30px; }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .project-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: .35s ease;
+      border: 1px solid rgba(255,255,255,.06);
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 20px 40px rgba(0,0,0,.8);
+    }
+
+    .project-image img {
+      width: 100%;
+      display: block;
+      transition: 0.4s ease;
+    }
+
+    .project-card:hover img {
+      transform: scale(1.04);
+    }
+
+    .project-content { padding: 20px; color: var(--muted); }
+
+   
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.95);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+    }
+
+    .modal.active { display: flex; }
+
+   
+    .contact {
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 12px 26px;
+      border-radius: 12px;
+      background: white;
+      color: black;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(255,255,255,.15);
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="modal" id="modal">
+  <img id="modalImg" src="">
+</div>
+
+  <div class="container">
+
+    <nav>
+      <div class="logo">Efemeridade</div>
+    </nav>
+
+    <div class="hero">
+      <div class="card">
+        <div class="tag">PORTFOLIO</div>
+        <h1>Builder</h1>
+        <div class="subtitle">
+          Builder focused on creating buildings, houses, items for games, and much more.
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <h2>0</h2>
+            <span>Projects</span>
+          </div>
+          <div class="stat">
+            <h2>14</h2>
+            <span>Clients</span>
+          </div>
+          <div class="stat">
+            <h2>Since 2016</h2>
+            <span>Building</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile">
+        <img class="avatar-img" src="https://cdn.discordapp.com/attachments/1473031126011346994/1473034881603735703/Untitled_Project_-_2026-02-16T161131.416.jpg?ex=6994be23&is=69936ca3&hm=909bcb9dc10735a268f5d7c7f3233746e582c723fd597d0373bea80ff76c0d23&">
+      </div>
+    </div>
+
+    <section>
+      <div class="section-title">Project — Prison</div>
+      <div class="projects">
+
+        <div class="project-card" onclick="openModal(this)">
+          <div class="project-image">
+            <img src="https://media.discordapp.net/attachments/1473031126011346994/1473031141454905665/image.png?ex=6994baa7&is=69936927&hm=cf6650432065c3c745ece58bd09d010a4c919fd5b5d9f2578de365cfe316aaba&=&format=webp&quality=lossless&width=1445&height=813">
+          </div>
+          <div class="project-content">
+            <h3>Prison</h3>
+          </div>
+        </div>
+
+        <div class="project-card" onclick="openModal(this)">
+          <div class="project-image">
+            <img src="https://media.discordapp.net/attachments/1473031126011346994/1473031240943927468/image.png?ex=6994babf&is=6993693f&hm=8328abd998f2b17c8195cb5ef0977be83673c89c34cdb837ab900221e72e180b&=&format=webp&quality=lossless&width=1556&height=813">
+          </div>
+          <div class="project-content">
+            <p>Inside part of the prisono</p>
+          </div>
+        </div>
+
+        <div class="project-card" onclick="openModal(this)">
+          <div class="project-image">
+            <img src="https://cdn.discordapp.com/attachments/1473031126011346994/1473031327342395593/image.png?ex=6994bad4&is=69936954&hm=18a046733fe2972a3edd3697554ccba0fc45100a6cf9dffad19c0d4aed5763b4">
+          </div>
+          <div class="project-content">
+            <p>Prison entrance</p>
+          </div>
+        </div>
+
+        <div class="project-card" onclick="openModal(this)">
+          <div class="project-image">
+            <img src="https://cdn.discordapp.com/attachments/1473031126011346994/1473031586327822396/image.png?ex=6994bb11&is=69936991&hm=fa22ff5374e520080fa38dcaff0ffeee203035816be6b8a8a3b7023fa9c406c2">
+          </div>
+          <div class="project-content">
+            <p>Detailed elements</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="contact">
+      <div class="section-title">Contact</div>
+      <div class="buttons">
+        <a class="btn" href="https://www.roblox.com/pt/users/55052453/profile" target="_blank">Roblox</a>
+        <a class="btn" href="#" target="_blank">Discord: .efemeridade</a>
+      </div>
+    </section>
+
+  </div>
+
+<script>
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modalImg');
+
+  function openModal(card) {
+    const img = card.querySelector('img');
+    modalImg.src = img.src;
+    modal.classList.add('active');
+  }
+
+  modal.onclick = () => modal.classList.remove('active');
+</script>
+
+</body>
+</html>
